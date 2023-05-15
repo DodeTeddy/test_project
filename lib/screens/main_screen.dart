@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:test_project_dimata_it/screens/home/home_screen.dart';
 import 'package:test_project_dimata_it/screens/news/news_screen.dart';
 import 'package:test_project_dimata_it/screens/profile/profile_screen.dart';
@@ -33,6 +34,9 @@ class _MainScreenState extends State<MainScreen> {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(115),
         child: AppBar(
+          systemOverlayStyle: const SystemUiOverlayStyle(
+            statusBarColor: Color(0XFFFF2828)
+          ),
           backgroundColor: Colors.white,
           elevation: 4,
           shadowColor: Colors.grey.withOpacity(0.2),

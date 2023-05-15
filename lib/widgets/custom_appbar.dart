@@ -23,9 +23,9 @@ class CustomAppBar extends StatelessWidget {
             Expanded(
               child: Container(
                 margin: const EdgeInsets.symmetric(vertical: 20.5),
-                child: Column(
+                child: const Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
+                  children: [
                     Text(
                       'Denpasar',
                       style: TextStyle(
