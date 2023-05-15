@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
-
+import 'package:quickalert/quickalert.dart';
+import 'package:test_project_dimata_it/screens/home/form_page.dart';
+import 'package:test_project_dimata_it/widgets/custom_dropdown.dart';
+import 'package:test_project_dimata_it/widgets/custom_textformfield.dart';
 import '../../widgets/custom_button.dart';
 import '../../widgets/custom_gridview_item.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     List textGridViewItem = ['Ambulans', 'Kebakaran', 'Kecelakaan', 'Banjir'];
@@ -22,6 +30,60 @@ class HomeScreen extends StatelessWidget {
       'assets/images/banjir.jpg'
     ];
 
+    String helpingCategory = 'Ambulans';
+
+    TextEditingController nameController = TextEditingController();
+    TextEditingController numberController = TextEditingController();
+    TextEditingController locationController = TextEditingController();
+    TextEditingController detailController = TextEditingController();
+
+    void alertShow(){
+      QuickAlert.show(
+        context: context, 
+        type: QuickAlertType.confirm,
+        customAsset: 'assets/images/logo_bpbd.png',
+        title: '',
+        widget: SizedBox(
+          height: 250,
+          child: ListView(
+            children: [
+              CustomDropDown(
+                title: 'Jenis Pertolongan', 
+                value: helpingCategory,
+                onChanged: (value) {
+                  setState(() {
+                    helpingCategory = value;
+                  });
+                }, 
+                items: textGridViewItem.map<DropdownMenuItem<String>>((value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+              ),
+              CustomTextFormField(
+                title: 'Nama', 
+                controller: nameController
+              ),
+              CustomTextFormField(
+                title: 'No. Telp', 
+                controller: numberController
+              ),
+              CustomTextFormField(
+                title: 'Lokasi', 
+                controller: locationController
+              ),
+              CustomTextFormField(
+                title: 'Keterangan', 
+                controller: detailController
+              )
+            ],
+          ),
+        )
+      );
+    }
+  
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -51,7 +113,9 @@ class HomeScreen extends StatelessWidget {
                       height: 36,
                       distance: 6.67,
                       onTap: () {
-                        
+                        Navigator.push(context, MaterialPageRoute(
+                          builder: (context) => const FormDetailHelpingScreen(),
+                        ));
                       }, 
                       text: 'Tolong', 
                       icon: 'assets/icons/peringatan.svg', 
@@ -73,7 +137,9 @@ class HomeScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: CustomButton(
                 onTap: () {
-                  
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (context) => const FormDetailHelpingScreen(),
+                  ));
                 }, 
                 text: 'TOLONG', 
                 icon: 'assets/icons/peringatan.svg', 
